@@ -16,26 +16,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.unisantos.financas.model.PessoaJuridica;
-import br.unisantos.financas.service.PessoaJuridicaService;
+import br.unisantos.financas.model.Categoria;
+import br.unisantos.financas.service.CategoriaService;
 
 @RestController
-@RequestMapping(value = "/pessoas-juridicas")
-public class PessoaJuridicaController implements ControllerInterface<PessoaJuridica> {
+@RequestMapping(value = "/categorias")
+public class CategoriaController implements ControllerInterface<Categoria> {
 
 	@Autowired
-	private PessoaJuridicaService service;
+	private CategoriaService service;
 
 	@Override
 	@GetMapping
-	public ResponseEntity<List<PessoaJuridica>> getAll() {
+	public ResponseEntity<List<Categoria>> getAll() {
 		return ResponseEntity.ok(service.findAll());
 	}
 
 	@Override
 	@GetMapping("/{id}")
 	public ResponseEntity<?> get(@PathVariable("id") Long id) {
-		PessoaJuridica obj = service.findById(id);
+		Categoria obj = service.findById(id);
 		if (obj != null) {
 			return ResponseEntity.ok(obj);
 		}
@@ -44,7 +44,7 @@ public class PessoaJuridicaController implements ControllerInterface<PessoaJurid
 
 	@Override
 	@PostMapping
-	public ResponseEntity<PessoaJuridica> post(@RequestBody PessoaJuridica obj) {
+	public ResponseEntity<Categoria> post(@RequestBody Categoria obj) {
 		service.create(obj);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId())
 				.toUri();
@@ -53,7 +53,7 @@ public class PessoaJuridicaController implements ControllerInterface<PessoaJurid
 
 	@Override
 	@PutMapping
-	public ResponseEntity<?> put(@RequestBody PessoaJuridica obj) {
+	public ResponseEntity<?> put(@RequestBody Categoria obj) {
 		if (service.update(obj)) {
 			return ResponseEntity.ok(obj);
 		}

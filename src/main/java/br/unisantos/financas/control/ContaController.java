@@ -61,7 +61,7 @@ public class ContaController implements ControllerInterface<Conta> {
 	}
 
 	@Override
-	@DeleteMapping
+	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") Long id) {
 		if (service.delete(id)) {
 			return ResponseEntity.ok().build();
