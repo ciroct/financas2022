@@ -68,5 +68,15 @@ public class ContaController implements ControllerInterface<Conta> {
 		}
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 	}
+	
+	@GetMapping("/cliente/{nome}")
+	public ResponseEntity<List<Conta>> getByNomeCliente(@PathVariable("nome") String nome) {
+		return ResponseEntity.ok(service.listarPorNomeCliente(nome));
+		
+	}
 
+	@GetMapping("/agencia/{agencia}")
+	public ResponseEntity<List<Conta>> getByAgencia(@PathVariable("agencia") Integer agencia) {
+		return ResponseEntity.ok(service.listarPorAgencia(agencia));		
+	}
 }

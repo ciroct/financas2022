@@ -2,10 +2,18 @@ package br.unisantos.financas.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_conta")
+@NamedQueries({
+	@NamedQuery(name = "Conta.listarPorAgencia", 
+			    query = "select c from Conta c where c.agencia = ?1"),
+	@NamedQuery(name = "Conta.listarPorNomeCliente",
+	query = "select c from Conta c join Cliente cc on cc.conta = c where cc.nome like ?1")
+})
 public class Conta extends AbstractEntity {
 	private static final long serialVersionUID = 1L;
 	
